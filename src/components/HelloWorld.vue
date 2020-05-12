@@ -25,7 +25,7 @@
             v-for="(item,i) in searchResult"
             :key="i"
           >
-            <ExplainPad v-bind:word="searchText" v-bind:explain="item.val().explanation" v-bind:sentences="[1,2,3]"></ExplainPad>
+            <ExplainPad v-bind:word="searchText" v-bind:explain="item.val().explanation" v-bind:explainKey="item.key" v-bind:sentences="item"></ExplainPad>
           </v-expansion-panel>
         </v-expansion-panels>
       </v-col>
@@ -133,7 +133,10 @@
           this.searchResult = [];
           data.forEach( (item)=>{this.searchResult.push(item)});
           // this.searchResult = data.key;
-          // console.log(this.searchResult);
+          let test = []//Object.entries(this.searchResult[0]);
+          this.searchResult[0].forEach( (item) => {test.push(item)});
+          console.log(test);
+          console.log(this.searchResult[0]);
         }, 
         (data) => {console.log(data)})
       },

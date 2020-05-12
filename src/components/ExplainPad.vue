@@ -5,15 +5,15 @@
         <v-expansion-panel-content>
             <v-text-field
                 clearable
-                v-model="newExplanation"
-                @click:append="addSentence">
+                v-model="newSentence"
+                @click:prepend="addSentence">
                 <template v-slot:prepend>
-                    <v-btn icon class="mx-2" dark color="indigo">
+                    <v-btn icon class="mx-2" @click="addSentence" dark color="indigo">
                         <v-icon dark>mdi-plus</v-icon>
                     </v-btn>
                 </template>
             </v-text-field>
-            <p v-for="(sentence, i) in sentences" :key="i">{{ sentence }}</p>
+            <p v-for="(item, i) in sentences" :key="i">{{ item.key }}</p>
         </v-expansion-panel-content>
         </v-expansion-panel>
     </v-expansion-panels>
@@ -26,18 +26,19 @@
 export default {
     props: {
         explain: String,
-        sentences: Array,
+        sentences: [Object],
         word: String,
+        explainKey: String,
     },
     methods:{
         addSentence(){
-            var ref = firebase.db.ref(`vocabulary/${this.word}/${this.explain}`);
-            ref.push({ explanation : this.newExplanation });
-            console.log();
+            var ref = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}`);
+            ref.push({ sentence : this.newSentence });
+            console.log(this.newSentence);
         },
     },
     data: () => ({
-        newExplanation: '',
+        newSentence: '',
     })
 }
 </script>
