@@ -25,7 +25,7 @@
             v-for="(item,i) in searchResult"
             :key="i"
           >
-            <ExplainPad v-bind:word="searchText" v-bind:explain="item.val().explanation" v-bind:explainKey="item.key" v-bind:sentences="item"></ExplainPad>
+            <ExplainPad v-bind:word="searchText" v-bind:explain="item.val().explanation" v-bind:explainKey="item.key" v-bind:sentences="getGenerator(item)"></ExplainPad>
           </v-expansion-panel>
         </v-expansion-panels>
       </v-col>
@@ -145,6 +145,15 @@
         ref.push({ explanation : this.newExplanation });
         console.log(this.newExplanation);
         console.log(this.searchText);
+      },
+      getGenerator(items) {
+        if(items){
+          let array = [];
+          items.forEach((item) => {array.push(item)});
+          console.log(items);
+          console.log(array);
+          return array;
+        }
       }
     },
     data: () => ({

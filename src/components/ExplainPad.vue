@@ -13,7 +13,7 @@
                     </v-btn>
                 </template>
             </v-text-field>
-            <p v-for="(item, i) in sentences" :key="i">{{ item.key }}</p>
+            <p v-for="(item, i) in sentences" :key="i">{{ item.val().sentence }}</p>
         </v-expansion-panel-content>
         </v-expansion-panel>
     </v-expansion-panels>
@@ -26,7 +26,7 @@
 export default {
     props: {
         explain: String,
-        sentences: [Object],
+        sentences: Array,
         word: String,
         explainKey: String,
     },
