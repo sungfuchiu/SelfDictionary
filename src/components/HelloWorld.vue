@@ -127,16 +127,21 @@
     methods: {
       search(){
         var ref = firebase.db.ref('vocabulary/' + this.searchText);
-        console.log(this.searchText);
+        // console.log(this.searchText);
         ref.on('value', 
         (data) => {
-          this.searchResult = [];
-          data.forEach( (item)=>{this.searchResult.push(item)});
-          // this.searchResult = data.key;
-          let test = []//Object.entries(this.searchResult[0]);
-          this.searchResult[0].forEach( (item) => {test.push(item)});
-          console.log(test);
-          console.log(this.searchResult[0]);
+          console.log(`call ${data}`)
+          if(data){
+            this.searchResult = [];
+            data.forEach( (item)=>{this.searchResult.push(item)});
+            console.log('get in');
+            // firebase.db.ref().update({'vocabulary/':this.searchText});
+            // this.searchResult = data.key;
+            // let test = []//Object.entries(this.searchResult[0]);
+            // this.searchResult[0].forEach( (item) => {test.push(item)});
+            // console.log(test);
+            // console.log(this.searchResult[0]);
+          }
         }, 
         (data) => {console.log(data)})
       },
