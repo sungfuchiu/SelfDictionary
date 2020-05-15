@@ -25,7 +25,7 @@
             v-for="(item,i) in searchResult"
             :key="i"
           >
-            <ExplainPad v-bind:word="searchText" v-bind:explain="item.val().explanation" v-bind:explainKey="item.key" v-bind:sentences="getGenerator(item)"></ExplainPad>
+            <ExplainPad v-bind:word="searchText" v-bind:explain="item.val().explanation" v-bind:explainDate="item.val().date" v-bind:explainKey="item.key" v-bind:sentences="getGenerator(item)"></ExplainPad>
           </v-expansion-panel>
         </v-expansion-panels>
       </v-col>
@@ -147,7 +147,9 @@
       },
       addExplanation() {
         var ref = firebase.db.ref(`vocabulary/${this.searchText}`);
-        ref.push({ explanation : this.newExplanation });
+        let today = new Date();
+        let time = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        ref.push({ explanation : this.newExplanation, date : time  });
         console.log(this.newExplanation);
         console.log(this.searchText);
       },

@@ -1,7 +1,7 @@
 <template>
     <v-expansion-panels>
         <v-expansion-panel>
-        <v-expansion-panel-header>{{ explain }}</v-expansion-panel-header>
+        <v-expansion-panel-header>{{ `${explain} ${explainDate}` }}</v-expansion-panel-header>
         <v-expansion-panel-content>
             <v-text-field
                 clearable
@@ -29,6 +29,7 @@ export default {
         sentences: Array,
         word: String,
         explainKey: String,
+        explainDate: Date,
     },
     methods:{
         addSentence(){
