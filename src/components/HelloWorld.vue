@@ -29,84 +29,6 @@
           </v-expansion-panel>
         </v-expansion-panels>
       </v-col>
-
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
-        </h1>
-
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a
-            href="https://community.vuetifyjs.com"
-            target="_blank"
-          >Discord Community</a>
-        </p>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          What's next?
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Important Links
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Ecosystem
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-        </v-row>
-      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -126,32 +48,33 @@
     },
     methods: {
       search(){
-        var ref = firebase.db.ref('vocabulary/' + this.searchText);
-        // console.log(this.searchText);
-        ref.on('value', 
+        let vocabRef = firebase.db.ref('vocabulary/' + this.searchText);
+        vocabRef.on('value', 
         (data) => {
           console.log(`call ${data}`)
           if(data){
             this.searchResult = [];
             data.forEach( (item)=>{this.searchResult.push(item)});
-            console.log('get in');
-            // firebase.db.ref().update({'vocabulary/':this.searchText});
-            // this.searchResult = data.key;
-            // let test = []//Object.entries(this.searchResult[0]);
-            // this.searchResult[0].forEach( (item) => {test.push(item)});
-            // console.log(test);
-            // console.log(this.searchResult[0]);
           }
         }, 
         (data) => {console.log(data)})
       },
       addExplanation() {
-        var ref = firebase.db.ref(`vocabulary/${this.searchText}`);
+        let explainRef = firebase.db.ref(`vocabulary/${this.searchText}`);
         let today = new Date();
         let time = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        ref.push({ explanation : this.newExplanation, date : time  });
-        console.log(this.newExplanation);
-        console.log(this.searchText);
+        let addItem = {};//{explanation : this.newExplanation, date : time};
+        addItem[''] = this.newExplanation;
+        addItem[`/${this.newExplanation}/`] = time;
+        let explain = this.newExplanation;
+        explainRef.once('value', function(snapshot){
+          if(!snapshot.hasChild(explain)){
+            snapshot.update(addItem);
+          }
+        });
+        // explainRef.push({ explanation : this.newExplanation, date : time  });
+        // console.log(this.newExplanation);
+        // console.log(this.searchText);
       },
       getGenerator(items) {
         if(items){

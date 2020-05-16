@@ -29,7 +29,7 @@ export default {
         sentences: Array,
         word: String,
         explainKey: String,
-        explainDate: Date,
+        explainDate: String,
     },
     methods:{
         addSentence(){
