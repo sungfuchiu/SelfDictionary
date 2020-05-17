@@ -51,7 +51,7 @@
         let vocabRef = firebase.db.ref('vocabulary/' + this.searchText);
         vocabRef.on('value', 
         (data) => {
-          console.log(`call ${data}`)
+          // console.log(`call ${data}`)
           if(data){
             this.searchResult = [];
             data.forEach( (item)=>{this.searchResult.push(item)});
@@ -61,15 +61,19 @@
       },
       addExplanation() {
         let explainRef = firebase.db.ref(`vocabulary/${this.searchText}`);
+        let searchExplainRef = firebase.db.ref(`vocabulary/${this.searchText}`).orderByChild('explanation').equalTo(this.newExplanation);
         let today = new Date();
         let time = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        let addItem = {};//{explanation : this.newExplanation, date : time};
-        addItem[''] = this.newExplanation;
-        addItem[`/${this.newExplanation}/`] = time;
-        let explain = this.newExplanation;
-        explainRef.once('value', function(snapshot){
-          if(!snapshot.hasChild(explain)){
-            snapshot.update(addItem);
+        let addItem = {explanation : this.newExplanation, date : time};
+        // addItem[''] = this.newExplanation;
+        // addItem[`/${this.newExplanation}/`] = time;
+        // let explain = this.newExplanation;
+        searchExplainRef.once('value', function(snapshot){
+          // let result = [];
+          // snapshot.forEach( (item)=>{result.push(item)});
+          // console.log(result);
+          if(!snapshot.exists()){
+            explainRef.push(addItem);
           }
         });
         // explainRef.push({ explanation : this.newExplanation, date : time  });
@@ -80,8 +84,8 @@
         if(items){
           let array = [];
           items.forEach((item) => {array.push(item)});
-          console.log(items);
-          console.log(array);
+          // console.log(items);
+          // console.log(array);
           return array;
         }
       }
