@@ -1,7 +1,18 @@
 <template>
     <v-expansion-panels>
         <v-expansion-panel>
-        <v-expansion-panel-header>{{ `${explain} ${explainDate}` }}</v-expansion-panel-header>
+        <v-expansion-panel-header>
+            <v-row>
+                <v-col cols="9">
+                {{ `${explain} ${explainDate}` }}
+                </v-col>
+                <v-col cols="3" offset>
+                <v-btn icon color="red" @click.native.stop="show">
+                <v-icon>mdi-close-circle-outline</v-icon>
+                </v-btn>
+                </v-col>
+            </v-row>
+            </v-expansion-panel-header>
         <v-expansion-panel-content>
             <v-text-field
                 clearable
@@ -37,6 +48,10 @@ export default {
             ref.push({ sentence : this.newSentence });
             console.log(this.newSentence);
         },
+        show(event){
+            event.preventDefault();
+            console.log('show');
+        }
     },
     data: () => ({
         newSentence: '',
