@@ -65,27 +65,16 @@
         let today = new Date();
         let time = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         let addItem = {explanation : this.newExplanation, date : time};
-        // addItem[''] = this.newExplanation;
-        // addItem[`/${this.newExplanation}/`] = time;
-        // let explain = this.newExplanation;
         searchExplainRef.once('value', function(snapshot){
-          // let result = [];
-          // snapshot.forEach( (item)=>{result.push(item)});
-          // console.log(result);
           if(!snapshot.exists()){
             explainRef.push(addItem);
           }
         });
-        // explainRef.push({ explanation : this.newExplanation, date : time  });
-        // console.log(this.newExplanation);
-        // console.log(this.searchText);
       },
       getGenerator(items) {
         if(items){
           let array = [];
           items.forEach((item) => {array.push(item)});
-          // console.log(items);
-          // console.log(array);
           return array;
         }
       }
