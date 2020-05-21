@@ -20,6 +20,9 @@
       </v-col>
 
       <v-col cols="12">
+        <v-alert type="info" v-if="!searchResult.length">
+          Word not found.
+        </v-alert>
         <v-expansion-panels>
           <v-expansion-panel
             v-for="(item,i) in searchResult"
@@ -48,6 +51,8 @@
     },
     methods: {
       search(){
+        if(!this.searchText)
+          return;
         let vocabRef = firebase.db.ref('vocabulary/' + this.searchText);
         vocabRef.on('value', 
         (data) => {

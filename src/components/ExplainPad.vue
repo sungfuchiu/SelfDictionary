@@ -59,9 +59,10 @@ export default {
     },
     methods:{
         addSentence(){
-            var ref = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}`);
-            ref.push({ sentence : this.newSentence });
-            console.log(this.newSentence);
+            if(this.newSentence){
+                var ref = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}`);
+                ref.push({ sentence : this.newSentence });
+            }
         },
         removeExplain(){
             var ref = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}`);
