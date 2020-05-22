@@ -20,7 +20,7 @@
       </v-col>
 
       <v-col cols="12">
-        <v-alert type="info" v-if="!searchResult.length">
+        <v-alert type="info" v-if="isSearchFail">
           Word not found.
         </v-alert>
         <v-expansion-panels>
@@ -51,6 +51,7 @@
     },
     methods: {
       search(){
+        this.isSearchFail = false;
         if(!this.searchText)
           return;
         let vocabRef = firebase.db.ref('vocabulary/' + this.searchText);
@@ -60,6 +61,9 @@
           if(data){
             this.searchResult = [];
             data.forEach( (item)=>{this.searchResult.push(item)});
+            if(this.searchResult.length === 0){
+              this.isSearchFail = true;
+            }
           }
         }, 
         (data) => {console.log(data)})
@@ -86,9 +90,8 @@
     },
     data: () => ({
       searchText: '',
-      searchResult: [
-
-      ],
+      searchResult: [],
+      isSearchFail:false,
       newExplanation: '',
       ecosystem: [
         {
