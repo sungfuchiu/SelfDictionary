@@ -74,6 +74,7 @@
         let today = new Date();
         let time = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         let addItem = {explanation : this.newExplanation, date : time};
+            this.isSearchFail = false;  
         searchExplainRef.once('value', function(snapshot){
           if(!snapshot.exists()){
             explainRef.push(addItem);

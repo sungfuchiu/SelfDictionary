@@ -61,7 +61,13 @@ export default {
         addSentence(){
             if(this.newSentence){
                 var ref = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}`);
-                ref.push({ sentence : this.newSentence });
+                let searchSentenceRef = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}`).orderByChild('sentence').equalTo(this.newSentence);
+                let newSentence = this.newSentence;
+                searchSentenceRef.once('value', function(snapshot){
+                if(!snapshot.exists()){
+                    ref.push({ sentence : newSentence });
+                }
+                });
             }
         },
         removeExplain(){
