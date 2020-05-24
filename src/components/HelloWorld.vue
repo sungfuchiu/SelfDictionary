@@ -12,6 +12,7 @@
             clearable
             label="Explanation"
             type="text"
+            v-on:keyup.enter="addExplanation"
           >
             <template v-slot:append-outer>
               <v-btn text @click="addExplanation" color="primary">Add</v-btn>
@@ -74,7 +75,7 @@
         let today = new Date();
         let time = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         let addItem = {explanation : this.newExplanation, date : time};
-            this.isSearchFail = false;  
+        this.isSearchFail = false;  
         searchExplainRef.once('value', function(snapshot){
           if(!snapshot.exists()){
             explainRef.push(addItem);

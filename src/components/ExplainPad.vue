@@ -18,6 +18,7 @@
             <v-text-field
                 clearable
                 v-model="newSentence"
+                v-on:keyup.enter="addSentence"
                 @click:prepend="addSentence">
                 <template v-slot:prepend>
                     <v-btn icon class="mx-2" @click="addSentence" dark color="indigo">
