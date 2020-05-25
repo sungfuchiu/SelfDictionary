@@ -3,10 +3,10 @@
         <v-expansion-panel>
         <v-expansion-panel-header>
             <v-row>
-                <v-col cols="9">
+                <v-col cols="10">
                     <v-col cols="12">{{ `${explain} ${explainDate}` }}</v-col>
                 </v-col>
-                <v-col cols="3" offset>
+                <v-col cols="2" offset>
                     <!-- @click.native.stop="show" -->
                     <v-btn icon color="red" @click.stop="cancelDialog = true">
                         <v-icon>mdi-close-circle-outline</v-icon>
@@ -15,18 +15,28 @@
             </v-row>
             </v-expansion-panel-header>
         <v-expansion-panel-content>
-            <v-text-field
-                clearable
-                v-model="newSentence"
-                v-on:keyup.enter="addSentence"
-                @click:prepend="addSentence">
-                <template v-slot:prepend>
-                    <v-btn icon class="mx-2" @click="addSentence" dark color="indigo">
-                        <v-icon dark>mdi-plus</v-icon>
+            <v-row>
+                <v-col cols="12">
+                    <v-text-field
+                        clearable
+                        v-model="newSentence"
+                        v-on:keyup.enter="addSentence">
+                        <template v-slot:append-outer>
+                            <v-btn text @click="addSentence" color="primary">Add</v-btn>
+                        </template>
+                    </v-text-field>
+                </v-col>
+            </v-row>
+            <v-row v-for="(item, i) in sentences" :key="i">
+                <v-col cols="11">
+                    <p>{{ item.val().sentence }} {{item.key}}</p>
+                </v-col>
+                <v-col cols="1">
+                    <v-btn icon color="red" :id="item.key" @click="removeSentence($event)">
+                        <v-icon>mdi-close-circle-outline</v-icon>
                     </v-btn>
-                </template>
-            </v-text-field>
-            <p v-for="(item, i) in sentences" :key="i">{{ item.val().sentence }}</p>
+                </v-col>
+            </v-row>
         </v-expansion-panel-content>
         </v-expansion-panel>
         <v-dialog v-model="cancelDialog" max-width="300px">
@@ -75,6 +85,12 @@ export default {
             var ref = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}`);
             ref.remove();
             this.cancelDialog = false;
+        },
+        removeSentence(event){
+            let targetId = event.currentTarget.id;
+            console.log(targetId);
+            // var ref = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}`);
+            // ref.remove();
         }
     },
     data: () => ({
