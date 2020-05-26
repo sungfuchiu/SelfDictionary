@@ -53,12 +53,12 @@
     methods: {
       search(){
         this.isSearchFail = false;
+        this.searchText = this.searchText.trim();
         if(!this.searchText)
           return;
         let vocabRef = firebase.db.ref('vocabulary/' + this.searchText);
         vocabRef.on('value', 
         (data) => {
-          // console.log(`call ${data}`)
           if(data){
             this.searchResult = [];
             data.forEach( (item)=>{this.searchResult.push(item)});
@@ -70,6 +70,7 @@
         (data) => {console.log(data)})
       },
       addExplanation() {
+        this.newExplanation = this.newExplanation.trim();
         let explainRef = firebase.db.ref(`vocabulary/${this.searchText}`);
         let searchExplainRef = firebase.db.ref(`vocabulary/${this.searchText}`).orderByChild('explanation').equalTo(this.newExplanation);
         let today = new Date();
