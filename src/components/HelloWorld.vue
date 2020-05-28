@@ -20,16 +20,6 @@
           </v-text-field>
       </v-col>
 
-      <v-col cols="1">
-        <v-text-field v-model="synonym" v-on:keyup.enter="addSynonym">
-        </v-text-field>
-      </v-col>
-      <v-col cols="11">
-        <v-chip v-for="(item, i) in synonyms" :key="i" color="seconary" text-color="white">
-          {{item}}
-        </v-chip>
-      </v-col>
-
       <v-col cols="12">
         <v-alert type="info" v-if="isSearchFail">
           Word not found.
@@ -39,7 +29,7 @@
             v-for="(item,i) in searchResult"
             :key="i"
           >
-            <ExplainPad v-bind:word="searchText" v-bind:explain="item.val().explanation" v-bind:explainDate="item.val().date" v-bind:explainKey="item.key" v-bind:sentences="getGenerator(item)"></ExplainPad>
+            <ExplainPad v-bind:word="searchText" v-bind:explain="item.val().explanation" v-bind:synonyms="item.val().synonym" v-bind:explainDate="item.val().date" v-bind:explainKey="item.key" v-bind:sentences="getGenerator(item)"></ExplainPad>
           </v-expansion-panel>
         </v-expansion-panels>
       </v-col>
@@ -100,15 +90,10 @@
           return array;
         }
       },
-      addSynonym(){
-        this.synonyms.push(this.synonym);
-      }
     },
     data: () => ({
       searchText: '',
       searchResult: [],
-      synonyms: [],
-      synonym: '',
       isSearchFail:false,
       newExplanation: '',
       ecosystem: [

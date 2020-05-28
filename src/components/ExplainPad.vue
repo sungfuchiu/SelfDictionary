@@ -16,6 +16,21 @@
             </v-expansion-panel-header>
         <v-expansion-panel-content>
             <v-row>
+                <v-col cols="3">
+                    <v-text-field 
+                        v-model="synonym" 
+                        v-on:keyup.enter="addSynonym"
+                        outlined
+                        clearable>
+                    </v-text-field>
+                </v-col>
+                <v-col cols="9">
+                    <v-chip v-for="(item, i) in synonyms" :key="i" color="seconary" text-color="white">
+                    {{item}}
+                    </v-chip>
+                </v-col>
+            </v-row>
+            <v-row>
                 <v-col cols="12">
                     <v-text-field
                         clearable
@@ -67,6 +82,7 @@ export default {
         word: String,
         explainKey: String,
         explainDate: String,
+        synonyms: {},
     },
     methods:{
         addSentence(){
@@ -92,11 +108,27 @@ export default {
             console.log(targetId);
             var ref = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}/${targetId}`);
             ref.remove();
+        },
+        addSynonym(){
+            this.synonym = this.synonym.trim();
+            if(this.synonym){
+                var ref = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}/synonym`);
+                var searchSynonym = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}/synonym`).equalTo(this.synonym);
+                let newSynomyn = this.synonym;
+                // let searchSentenceRef = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}`).orderByChild('sentence').equalTo(this.newSentence);
+                // let newSentence = this.newSentence;
+                searchSynonym.once('value', function(snapshot){
+                if(!snapshot.exists()){
+                    ref.push( newSynomyn );
+                }
+                });
+            }
         }
     },
     data: () => ({
         newSentence: '',
-            cancelDialog: false,
+        cancelDialog: false,
+        synonym: '',
     })
 }
 </script>
