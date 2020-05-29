@@ -29,7 +29,7 @@
             v-for="(item,i) in searchResult"
             :key="i"
           >
-            <ExplainPad v-bind:word="searchText" v-bind:explain="item.val().explanation" v-bind:synonyms="item.val().synonym" v-bind:explainDate="item.val().date" v-bind:explainKey="item.key" v-bind:sentences="getGenerator(item)"></ExplainPad>
+            <ExplainPad v-bind:word="searchText" @searchSynonym="searchSynonym" v-bind:explain="item.val().explanation" v-bind:synonyms="item.val().synonym" v-bind:explainDate="item.val().date" v-bind:explainKey="item.key" v-bind:sentences="getGenerator(item)"></ExplainPad>
           </v-expansion-panel>
         </v-expansion-panels>
       </v-col>
@@ -90,6 +90,10 @@
           return array;
         }
       },
+      searchSynonym(value){
+        this.searchText = value;
+        this.search();
+      }
     },
     data: () => ({
       searchText: '',

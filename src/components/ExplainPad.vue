@@ -25,7 +25,7 @@
                     </v-text-field>
                 </v-col>
                 <v-col cols="9">
-                    <v-chip v-for="(item, i) in synonyms" :key="i" color="seconary" text-color="white">
+                    <v-chip v-for="(item, i) in synonyms" @click="searchSynonym(item)" :key="i" color="seconary" text-color="white">
                     {{item}}
                     </v-chip>
                 </v-col>
@@ -123,6 +123,9 @@ export default {
                 }
                 });
             }
+        },
+        searchSynonym(value){
+            this.$emit('searchSynonym', value);
         }
     },
     data: () => ({
