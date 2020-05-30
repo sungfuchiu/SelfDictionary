@@ -16,7 +16,68 @@
             </v-expansion-panel-header>
         <v-expansion-panel-content>
             <v-row>
-                <v-col cols="3">
+                <v-card>
+                    <v-container fluid>
+                        <v-layout>
+                        <v-card-title>
+                            <div>
+                                <div class="headline">Synonym</div>
+                                <div>
+                                    <v-text-field 
+                                        v-model="synonym" 
+                                        v-on:keyup.enter="addSynonym"
+                                        outlined
+                                        clearable>
+                                    </v-text-field>
+                                </div>
+                                <div class="text-xs-center">
+                                    <v-chip v-for="(item, i) in synonyms" 
+                                            @click="searchSynonym(item)" 
+                                            :key="i" 
+                                            color="seconary" 
+                                            text-color="white">
+                                        {{item}}
+                                    </v-chip>
+                                </div>
+                            </div>
+                        </v-card-title>
+                        </v-layout>
+                    </v-container>
+                </v-card>
+                <v-card>
+                    <v-container fluid>
+                        <v-layout>
+                        <v-card-title>
+                            <div>
+                                <div class="headline">Antonym</div>
+                                <div>
+                                    <v-text-field 
+                                        v-model="synonym" 
+                                        v-on:keyup.enter="addSynonym"
+                                        outlined
+                                        clearable>
+                                    </v-text-field>
+                                </div>
+                                <div>
+                                    <v-chip v-for="(item, i) in synonyms" 
+                                            @click="searchSynonym(item)" 
+                                            :key="i" 
+                                            color="seconary" 
+                                            text-color="white">
+                                        {{item}}
+                                    </v-chip>
+                                </div>
+                            </div>
+                        </v-card-title>
+                        </v-layout>
+                    </v-container>
+                </v-card>
+            </v-row>
+            <!-- <v-row>
+                <v-col cols="1">
+
+                </v-col>
+                <v-col cols="2">
                     <v-text-field 
                         v-model="synonym" 
                         v-on:keyup.enter="addSynonym"
@@ -25,11 +86,12 @@
                     </v-text-field>
                 </v-col>
                 <v-col cols="9">
+                    Synonym
                     <v-chip v-for="(item, i) in synonyms" @click="searchSynonym(item)" :key="i" color="seconary" text-color="white">
                     {{item}}
                     </v-chip>
                 </v-col>
-            </v-row>
+            </v-row> -->
             <v-row>
                 <v-col cols="12">
                     <v-text-field
