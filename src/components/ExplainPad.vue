@@ -17,8 +17,6 @@
         <v-expansion-panel-content>
             <v-row>
                 <v-card>
-                    <v-container fluid>
-                        <v-layout>
                         <v-card-title>
                             <div>
                                 <div class="headline">Synonym</div>
@@ -41,8 +39,6 @@
                                 </div>
                             </div>
                         </v-card-title>
-                        </v-layout>
-                    </v-container>
                 </v-card>
                 <v-card>
                     <v-container fluid>
