@@ -17,6 +17,8 @@
         <v-expansion-panel-content>
             <v-row>
                 <v-card>
+                    <v-container fluid>
+                        <v-layout>
                         <v-card-title>
                             <div>
                                 <div class="headline">Synonym</div>
@@ -30,7 +32,7 @@
                                 </div>
                                 <div class="text-xs-center">
                                     <v-chip v-for="(item, i) in synonyms" 
-                                            @click="searchSynonym(item)" 
+                                            @click="searchWord(item)" 
                                             :key="i" 
                                             color="seconary" 
                                             text-color="white">
@@ -39,6 +41,8 @@
                                 </div>
                             </div>
                         </v-card-title>
+                        </v-layout>
+                    </v-container>
                 </v-card>
                 <v-card>
                     <v-container fluid>
@@ -48,15 +52,15 @@
                                 <div class="headline">Antonym</div>
                                 <div>
                                     <v-text-field 
-                                        v-model="synonym" 
-                                        v-on:keyup.enter="addSynonym"
+                                        v-model="antonym" 
+                                        v-on:keyup.enter="addAntonym"
                                         outlined
                                         clearable>
                                     </v-text-field>
                                 </div>
                                 <div>
-                                    <v-chip v-for="(item, i) in synonyms" 
-                                            @click="searchSynonym(item)" 
+                                    <v-chip v-for="(item, i) in antonyms" 
+                                            @click="searchWord(item)" 
                                             :key="i" 
                                             color="seconary" 
                                             text-color="white">
@@ -141,6 +145,7 @@ export default {
         explainKey: String,
         explainDate: String,
         synonyms: {},
+        antonyms: {},
     },
     methods:{
         addSentence(){
@@ -182,14 +187,28 @@ export default {
                 });
             }
         },
+        addAntonym(){
+            this.antonym = this.antonym.trim();
+            if(this.antonym){
+                var ref = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}/antonym`);
+                var searchAntonym = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}/antonym`).equalTo(this.antonym);
+                let newAntonym = this.antonym;
+                searchAntonym.once('value', function(snapshot){
+                if(!snapshot.exists()){
+                    ref.push( newAntonym );
+                }
+                });
+            }
+        },
         searchSynonym(value){
-            this.$emit('searchSynonym', value);
+            this.$emit('searchWord', value);
         }
     },
     data: () => ({
         newSentence: '',
         cancelDialog: false,
         synonym: '',
+        antonym: '',
     })
 }
 </script>
