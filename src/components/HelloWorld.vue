@@ -66,11 +66,21 @@
         if(!this.searchText)
           return;
         let vocabRef = firebase.db.ref('vocabulary/' + this.searchText);
+        let vocabCountRef = firebase.db.ref(`vocabulary/${this.searchText}/count`);
         vocabRef.on('value', 
         (data) => {
           if(data){
             this.searchResult = [];
             data.forEach( (item)=>{this.searchResult.push(item)});
+            console.log(vocabCountRef);
+            vocabCountRef.once('value', (count) => {
+              console.log(count.value);
+              if(count.val()){                
+                count.value = count.value + 1;
+              }else{
+                vocabRef.push({count : 1});
+              }
+            })
             if(this.searchResult.length === 0){
               this.isSearchFail = true;
             }

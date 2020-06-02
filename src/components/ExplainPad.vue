@@ -200,7 +200,7 @@ export default {
                 });
             }
         },
-        searchSynonym(value){
+        searchWord(value){
             this.$emit('searchWord', value);
         }
     },
