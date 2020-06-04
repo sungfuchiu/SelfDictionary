@@ -67,24 +67,6 @@
           return;
         let vocabRef = firebase.db.ref('vocabulary/' + this.searchText);
         let vocabCountRef = firebase.db.ref(`vocabulary/${this.searchText}/count`);
-        let deleteSpill = firebase.db.ref('vocabulary/spill');
-        deleteSpill.on('value',
-        (data) => {
-          if(data){
-            let temp = [];
-            data.forEach( (item)=>{temp.push(item)});
-            console.log("for temp");
-              console.log(temp);
-            for(let item in temp){
-            console.log("for key");
-              console.log(item.key);
-              if(item.val() !== '-M86AuN9SZ-Th3BEwH5N'){
-                item = null;
-              }
-            }
-          }
-        }, 
-        (data) => {console.log(data)});
         vocabRef.on('value', 
         (data) => {
           if(data){
