@@ -50,10 +50,6 @@
   const firebase = require('../firebaseConfig.js')
   import ExplainPad from './ExplainPad'; 
 
-  // function getData(data){
-  //   console.log(data);
-  //   this.searchText = data.key;
-  // }
   export default {
     name: 'HelloWorld',
     components: {
