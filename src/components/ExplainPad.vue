@@ -178,8 +178,6 @@ export default {
                 var ref = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}/synonym`);
                 var searchSynonym = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}/synonym`).equalTo(this.synonym);
                 let newSynomyn = this.synonym;
-                // let searchSentenceRef = firebase.db.ref(`vocabulary/${this.word}/${this.explainKey}`).orderByChild('sentence').equalTo(this.newSentence);
-                // let newSentence = this.newSentence;
                 searchSynonym.once('value', function(snapshot){
                 if(!snapshot.exists()){
                     ref.push( newSynomyn );
