@@ -97,7 +97,8 @@
                     <v-text-field
                         clearable
                         v-model="newSentence"
-                        v-on:keyup.enter="addSentence">
+                        v-on:keyup.enter="addSentence"
+                        :rules="[() => newSentence.match(/.*\./i) || 'This field must be a complete sentence']">
                         <template v-slot:append-outer>
                             <v-btn text @click="addSentence" color="primary">Add</v-btn>
                         </template>

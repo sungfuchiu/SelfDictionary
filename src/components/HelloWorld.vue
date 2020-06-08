@@ -117,7 +117,6 @@
       searchResult: [],
       isSearchFail:false,
       newExplanation: '',
-      ],
     }),
   }
 </script>
