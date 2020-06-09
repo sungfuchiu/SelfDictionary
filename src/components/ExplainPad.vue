@@ -73,25 +73,6 @@
                     </v-container>
                 </v-card>
             </v-row>
-            <!-- <v-row>
-                <v-col cols="1">
-
-                </v-col>
-                <v-col cols="2">
-                    <v-text-field 
-                        v-model="synonym" 
-                        v-on:keyup.enter="addSynonym"
-                        outlined
-                        clearable>
-                    </v-text-field>
-                </v-col>
-                <v-col cols="9">
-                    Synonym
-                    <v-chip v-for="(item, i) in synonyms" @click="searchSynonym(item)" :key="i" color="seconary" text-color="white">
-                    {{item}}
-                    </v-chip>
-                </v-col>
-            </v-row> -->
             <v-row>
                 <v-col cols="12">
                     <v-text-field
