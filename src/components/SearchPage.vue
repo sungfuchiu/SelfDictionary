@@ -2,7 +2,11 @@
   <v-container>
     <v-row class="text-center">
       <v-col cols="12">
-        <v-text-field v-model="searchText" v-on:keyup.enter="search" label="Search">
+        <v-text-field 
+          v-model="searchText" 
+          v-on:keyup.enter="search" 
+          label="Search"
+          :rules="[() => newSentence.match(/.*\./i) || 'This field must be a complete sentence']">>
         </v-text-field>
       </v-col>
       <v-col cols="12">

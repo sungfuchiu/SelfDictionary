@@ -38,19 +38,19 @@
     </v-app-bar>
 
     <v-content>
-      <HelloWorld/>
+      <SearchPage/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import SearchPage from './components/SearchPage';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    SearchPage,
   },
 
   data: () => ({
