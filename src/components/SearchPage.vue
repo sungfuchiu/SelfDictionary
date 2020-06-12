@@ -3,10 +3,10 @@
     <v-row class="text-center">
       <v-col cols="12">
         <v-text-field 
+          label="Search"
           v-model="searchText" 
           v-on:keyup.enter="search" 
-          label="Search"
-          :rules="[() => searchText.match(/.*/i) || 'This field must be texts']">>
+          :rules="[() => searchText.match(/[a]/i) || 'This field must be texts']">
         </v-text-field>
       </v-col>
       <v-col cols="12">
@@ -55,7 +55,7 @@
   import ExplainPad from './ExplainPad'; 
 
   export default {
-    name: 'HelloWorld',
+    name: 'SearchPage',
     components: {
       'ExplainPad' : ExplainPad
     },
