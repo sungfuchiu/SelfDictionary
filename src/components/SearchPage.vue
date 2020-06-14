@@ -6,7 +6,7 @@
           label="Search"
           v-model="searchText" 
           v-on:keyup.enter="search" 
-          :rules="[() => searchText.match(/[a]/i) || 'This field must be texts']">
+          :rules="[value => /^[a-zA-Z\s]*$/.test(value) || 'This field must be texts',]">
         </v-text-field>
       </v-col>
       <v-col cols="12">
