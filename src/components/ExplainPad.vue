@@ -7,7 +7,6 @@
                     <v-col cols="12">{{ `${explain} ${explainDate}` }}</v-col>
                 </v-col>
                 <v-col cols="2" offset>
-                    <!-- @click.native.stop="show" -->
                     <v-btn icon color="red" @click.stop="cancelDialog = true">
                         <v-icon>mdi-close-circle-outline</v-icon>
                     </v-btn>
