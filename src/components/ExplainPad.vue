@@ -102,9 +102,6 @@
           <v-card-title>
             Confirm
           </v-card-title>
-          <!-- <v-card-text>
-            <v-btn color="primary" dark>Open Dialog 3</v-btn>
-          </v-card-text> -->
           <v-card-actions>
             <v-btn color="primary" text @click="cancelDialog=false">Cancel</v-btn>
             <v-btn color="red" text @click="removeExplain">Remove</v-btn>
