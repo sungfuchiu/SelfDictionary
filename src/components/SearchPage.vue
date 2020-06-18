@@ -29,14 +29,14 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            flat
+            text
             color="primary"
             @click="startMenu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            flat
+            text
             color="primary"
             @click="$refs.startMenu.save(start)"
           >
@@ -73,14 +73,14 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            flat
+            text
             color="primary"
             @click="endMenu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            flat
+            text
             color="primary"
             @click="$refs.endMenu.save(end)"
           >
@@ -116,14 +116,14 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            flat
+            text
             color="primary"
             @click="nowMenu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            flat
+            text
             color="primary"
             @click="$refs.nowMenu.save(now)"
           >
@@ -131,6 +131,9 @@
           </v-btn>
         </v-date-picker>
       </v-menu>
+      <v-btn outlined fab dark color="teal" @click="searchByDate">
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
     </v-row>
     <v-row class="text-center">
       <v-col cols="12">
@@ -141,6 +144,8 @@
           :rules="[value => /^[a-zA-Z\s]*$/.test(value) || 'This field must be texts',]">
         </v-text-field>
       </v-col>
+    </v-row>
+    <v-row>
       <v-col cols="12">
           <v-text-field
             v-model="newExplanation"
@@ -246,6 +251,10 @@
       searchWord(value){
         this.searchText = value;
         this.search();
+      },
+      searchByDate(){
+        console.log(this.start);
+        console.log(this.end);
       }
     },
     data: () => ({
@@ -253,6 +262,19 @@
       searchResult: [],
       isSearchFail:false,
       newExplanation: '',
+      startMenu:false,
+      start: '',
+      endMenu:false,
+      end:'',
+      nowMenu:false,
+      now:null,
     }),
+    computed:{
+      hasEnd(){
+        return this.type in{
+          'custom-weekly': 1, 'custom-daily': 1
+        }
+      }
+    }
   }
 </script>
