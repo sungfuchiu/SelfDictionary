@@ -9,9 +9,7 @@
         :return-value.sync="start"
         transition="scale-transition"
         min-width="290px"
-        lazy
         offset-y
-        full-width
       >
         <template v-slot:activator="{ on }">
           <v-text-field
@@ -38,14 +36,13 @@
           <v-btn
             text
             color="primary"
-            @click="$refs.startMenu.save(start)"
+            @click="$refs.startMenu.save(start);"
           >
             OK
           </v-btn>
         </v-date-picker>
       </v-menu>
       <v-menu
-        v-if="hasEnd"
         ref="endMenu"
         v-model="endMenu"
         :close-on-content-click="false"
@@ -53,9 +50,7 @@
         :return-value.sync="end"
         transition="scale-transition"
         min-width="290px"
-        lazy
         offset-y
-        full-width
       >
         <template v-slot:activator="{ on }">
           <v-text-field
@@ -96,9 +91,7 @@
         :return-value.sync="now"
         transition="scale-transition"
         min-width="290px"
-        lazy
         offset-y
-        full-width
       >
         <template v-slot:activator="{ on }">
           <v-text-field
@@ -269,12 +262,5 @@
       nowMenu:false,
       now:null,
     }),
-    computed:{
-      hasEnd(){
-        return this.type in{
-          'custom-weekly': 1, 'custom-daily': 1
-        }
-      }
-    }
   }
 </script>
