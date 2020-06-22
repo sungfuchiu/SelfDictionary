@@ -175,6 +175,28 @@
             </ExplainPad>
           </v-expansion-panel>
         </v-expansion-panels>
+        <v-list two-line>
+          <template v-for="(item, index) in searchResultByDate">
+            <v-subheader
+              :key="item.key"
+            >
+              {{ item.key }}
+            </v-subheader>
+
+            <v-divider
+              :key="index"
+            ></v-divider>
+
+            <v-list-tile
+              :key="item.key"
+            >
+              <v-list-tile-content>
+                <v-list-tile-title v-html="item.key"></v-list-tile-title>
+                <v-list-tile-sub-title v-html="item.key"></v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </template>
+        </v-list>
       </v-col>
     </v-row>
   </v-container>
@@ -248,6 +270,21 @@
       searchByDate(){
         console.log(this.start);
         console.log(this.end);
+        let searchByDateRef = firebase.db.ref('vocabulary').orderByChild('date');
+            let tempArray = [];
+        searchByDateRef.once('value', function(snapshot){
+          // if(!snapshot.exists()){
+          // }
+            snapshot.forEach((item) => {tempArray.push(item)});
+            // console.log(this.searchResultByDate);
+            console.log('finish');
+            console.log(tempArray);
+            // foreach(let results in snapshot){
+
+            // }
+        });
+            this.searchResultByDate = tempArray;
+        // console.log(searchByDateRef.val());
       }
     },
     data: () => ({
@@ -261,6 +298,7 @@
       end:'',
       nowMenu:false,
       now:null,
+      searchResultByDate:[],
     }),
   }
 </script>
