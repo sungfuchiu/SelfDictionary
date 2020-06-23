@@ -273,18 +273,9 @@
         let searchByDateRef = firebase.db.ref('vocabulary').orderByChild('date');
             let tempArray = [];
         searchByDateRef.once('value', function(snapshot){
-          // if(!snapshot.exists()){
-          // }
             snapshot.forEach((item) => {tempArray.push(item)});
-            // console.log(this.searchResultByDate);
-            console.log('finish');
-            console.log(tempArray);
-            // foreach(let results in snapshot){
-
-            // }
         });
             this.searchResultByDate = tempArray;
-        // console.log(searchByDateRef.val());
       }
     },
     data: () => ({
