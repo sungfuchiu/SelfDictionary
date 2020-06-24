@@ -184,11 +184,9 @@
             </v-subheader>
 
             <v-divider
-              :key="index"
             ></v-divider>
 
             <v-list-tile
-              :key="item.key"
             >
               <v-list-tile-content>
                 <v-list-tile-title v-html="item.key"></v-list-tile-title>
