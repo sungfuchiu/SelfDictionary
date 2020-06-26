@@ -184,15 +184,17 @@
             </v-subheader>
 
             <v-divider
+              :key="index"
             ></v-divider>
 
-            <v-list-tile
+            <!-- <v-list-tile
+              :key="item.key"
             >
               <v-list-tile-content>
                 <v-list-tile-title v-html="item.key"></v-list-tile-title>
                 <v-list-tile-sub-title v-html="item.key"></v-list-tile-sub-title>
               </v-list-tile-content>
-            </v-list-tile>
+            </v-list-tile> -->
           </template>
         </v-list>
       </v-col>
