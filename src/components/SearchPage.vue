@@ -268,11 +268,15 @@
         this.search();
       },
       searchByDate(){
-        console.log(this.start);
-        console.log(this.end);
-        let searchByDateRef = firebase.db.ref('vocabulary').orderByChild('date');
+        console.log((new Date(this.start)).date);
+        console.log((new Date(this.end)).date);
+        let searchByDateRef = firebase.db.ref('vocabulary')
+                              .orderByChild('date')
+                              .startAt((new Date(this.start)).date)
+                              .endAt((new Date(this.end)).date);
             let tempArray = [];
         searchByDateRef.once('value', function(snapshot){
+          console.log(snapshot);
             snapshot.forEach((item) => {tempArray.push(item)});
         });
             this.searchResultByDate = tempArray;
