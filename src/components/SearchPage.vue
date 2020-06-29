@@ -247,6 +247,7 @@
         let explainRef = firebase.db.ref(`vocabulary/${this.searchText}`);
         let searchExplainRef = firebase.db.ref(`vocabulary/${this.searchText}`).orderByChild('explanation').equalTo(this.newExplanation);
         let today = new Date();
+        //Try to shift it in storing time stamp
         let time = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         let addItem = {explanation : this.newExplanation, date : time};
         this.isSearchFail = false;  
@@ -270,6 +271,7 @@
       searchByDate(){
         console.log((new Date(this.start)).date);
         console.log((new Date(this.end)).date);
+        //if stoed type is time stamp, it should be able to search with those methods
         let searchByDateRef = firebase.db.ref('vocabulary')
                               .orderByChild('date')
                               .startAt((new Date(this.start)).date)
