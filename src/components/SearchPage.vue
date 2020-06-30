@@ -246,10 +246,7 @@
         this.newExplanation = this.newExplanation.trim();
         let explainRef = firebase.db.ref(`vocabulary/${this.searchText}`);
         let searchExplainRef = firebase.db.ref(`vocabulary/${this.searchText}`).orderByChild('explanation').equalTo(this.newExplanation);
-        let today = new Date();
-        //Try to shift it in storing time stamp
-        let time = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        let addItem = {explanation : this.newExplanation, date : time};
+        let addItem = {explanation : this.newExplanation, date : firebase.database.ServerValue.TIMESTAMP};
         this.isSearchFail = false;  
         searchExplainRef.once('value', function(snapshot){
           if(!snapshot.exists()){
