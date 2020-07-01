@@ -169,7 +169,7 @@
               v-bind:explain="item.val().explanation" 
               v-bind:synonyms="item.val().synonym" 
               v-bind:antonyms="item.val().antonym" 
-              v-bind:explainDate="item.val().date" 
+              v-bind:explainDate="new Date(item.val().date).toLocaleDateString('en-US')" 
               v-bind:explainKey="item.key" 
               v-bind:sentences="getGenerator(item)">
             </ExplainPad>
