@@ -246,7 +246,7 @@
         this.newExplanation = this.newExplanation.trim();
         let explainRef = firebase.db.ref(`vocabulary/${this.searchText}`);
         let searchExplainRef = firebase.db.ref(`vocabulary/${this.searchText}`).orderByChild('explanation').equalTo(this.newExplanation);
-        let addItem = {explanation : this.newExplanation, date : firebase.database.ServerValue.TIMESTAMP};
+        let addItem = {explanation : this.newExplanation, date : new Date()};
         this.isSearchFail = false;  
         searchExplainRef.once('value', function(snapshot){
           if(!snapshot.exists()){
@@ -266,13 +266,16 @@
         this.search();
       },
       searchByDate(){
-        console.log((new Date(this.start)).date);
-        console.log((new Date(this.end)).date);
+        console.log(this.start);
+        console.log(this.end);
         //if stoed type is time stamp, it should be able to search with those methods
+        // let searchByDateRef = firebase.db.ref('vocabulary')
+        //                       .orderByChild('date')
+        //                       .startAt(this.star)
+        //                       .endAt(this.end);
         let searchByDateRef = firebase.db.ref('vocabulary')
-                              .orderByChild('date')
-                              .startAt((new Date(this.start)).date)
-                              .endAt((new Date(this.end)).date);
+                              .where("timestamp", ">=", "2017-11")
+                              .where("timestamp", "<", "2017-12");
             let tempArray = [];
         searchByDateRef.once('value', function(snapshot){
           console.log(snapshot);
