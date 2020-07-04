@@ -278,7 +278,7 @@
                               .where("timestamp", "<", "2017-12");
             let tempArray = [];
         searchByDateRef.once('value', function(snapshot){
-          console.log(snapshot);
+          // console.log(snapshot);
             snapshot.forEach((item) => {tempArray.push(item)});
         });
             this.searchResultByDate = tempArray;
