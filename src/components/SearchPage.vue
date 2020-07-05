@@ -269,6 +269,7 @@
         console.log(this.start);
         console.log(this.end);
         //if stoed type is time stamp, it should be able to search with those methods
+        // 2020/7/5 but it failed. I probably need to use firestore
         // let searchByDateRef = firebase.db.ref('vocabulary')
         //                       .orderByChild('date')
         //                       .startAt(this.star)
