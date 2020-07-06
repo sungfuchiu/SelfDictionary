@@ -270,13 +270,14 @@
         console.log(this.end);
         //if stoed type is time stamp, it should be able to search with those methods
         // 2020/7/5 but it failed. I probably need to use firestore
+        let searchByDateRef = firebase.db.ref()
+                              .child('brawl')
+                              .orderByChild('date')
+                              .startAt(this.star)
+                              .endAt(this.end);
         // let searchByDateRef = firebase.db.ref('vocabulary')
-        //                       .orderByChild('date')
-        //                       .startAt(this.star)
-        //                       .endAt(this.end);
-        let searchByDateRef = firebase.db.ref('vocabulary')
-                              .where("timestamp", ">=", "2017-11")
-                              .where("timestamp", "<", "2017-12");
+        //                       .where("timestamp", ">=", "2017-11")
+        //                       .where("timestamp", "<", "2017-12");
             let tempArray = [];
         searchByDateRef.once('value', function(snapshot){
           // console.log(snapshot);
