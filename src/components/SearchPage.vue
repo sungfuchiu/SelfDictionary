@@ -270,6 +270,7 @@
         console.log(this.end);
         //if stoed type is time stamp, it should be able to search with those methods
         // 2020/7/5 but it failed. I probably need to use firestore
+        // 2020/7/7 Not in the mood
         let searchByDateRef = firebase.db.ref()
                               .child('brawl')
                               .orderByChild('date')
