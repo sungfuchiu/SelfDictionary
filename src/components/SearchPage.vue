@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row
+      v-if="doesShowSearch"
+    >
       <v-menu
         ref="startMenu"
         v-model="startMenu"
@@ -203,8 +205,11 @@
 </template>
 
 <script>
-  const firebase = require('../firebaseConfig.js')
+  const firebase = require('../firebaseConfig.js');
+  const {Translate} = require('@google-cloud/translate').v2;
   import ExplainPad from './ExplainPad'; 
+  import TranslationKey from '../KeyForTranslationAPI.json'
+  const translate = new Translate({key:TranslationKey.key});
 
   export default {
     name: 'SearchPage',
@@ -212,6 +217,18 @@
       'ExplainPad' : ExplainPad
     },
     methods: {
+      async translateText() {
+        // Translates the text into the target language. "text" can be a string for
+        // translating a single piece of text, or an array of strings for translating
+        // multiple texts.
+        let translations = await translate.translate(this.searchText, 'zh-tw');
+        this.newExplanation = translations[0];
+        // translations = Array.isArray(translations) ? translations : [translations];
+        // console.log('Translations:');
+        // translations.forEach((translation) => {
+        //   console.log(`${this.searchText} => (zh-tw) ${translation}`);
+        // });
+      },
       search(){
         this.isSearchFail = false;
         this.searchText = this.searchText.trim();
@@ -241,12 +258,14 @@
           }
         }, 
         (data) => {console.log(data)})
+
+        this.translateText();
       },
       addExplanation() {
         this.newExplanation = this.newExplanation.trim();
         let explainRef = firebase.db.ref(`vocabulary/${this.searchText}`);
         let searchExplainRef = firebase.db.ref(`vocabulary/${this.searchText}`).orderByChild('explanation').equalTo(this.newExplanation);
-        let addItem = {explanation : this.newExplanation, date : new Date()};
+        let addItem = {explanation : this.newExplanation, date : firebase.database.ServerValue.TIMESTAMP}; //trying to add date  for firebase
         this.isSearchFail = false;  
         searchExplainRef.once('value', function(snapshot){
           if(!snapshot.exists()){
@@ -299,6 +318,8 @@
       nowMenu:false,
       now:null,
       searchResultByDate:[],
+      doesShowSearch: false, //Hide temporary
+      // translationKey: TranslationKey,
     }),
   }
 </script>

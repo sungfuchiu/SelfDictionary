@@ -13,6 +13,7 @@
   },
   "main": "background.js",
   "dependencies": {
+    "@google-cloud/translate": "^6.0.5",
     "core-js": "^3.6.4",
     "firebase": "^7.14.3",
     "vue": "^2.6.11",

@@ -1,4 +1,5 @@
 # selfdictionary
+Remember to get into ..\selfdictionary first
 
 ## Project setup
 ```

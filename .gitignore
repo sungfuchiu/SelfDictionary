@@ -22,3 +22,7 @@ yarn-error.log*
 
 #Electron-builder output
 /dist_electron
+
+#credential data
+/src/firebaseConfig.js
+/src/KeyForTranslationAPI.json
