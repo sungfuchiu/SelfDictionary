@@ -1,5 +1,6 @@
 # selfdictionary
 Remember to get into ..\selfdictionary first
+Need to have two credential files to execute:  /src/KeyForTranslationAPI.json, /src/firebaseConfig.js
 
 ## Project setup
 ```
